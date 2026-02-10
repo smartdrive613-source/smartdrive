@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | SmarDrive Car Audio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .shop-hero {
+            padding: 100px 20px 40px;
+            background-color: #0b0b0b;
+            text-align: center;
+        }
+
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .product-card {
+            background: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-image {
+            height: 250px;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            font-size: 5rem;
+            position: relative;
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .product-price {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .btn-full {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-full:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border: 1px solid #333;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 12px;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .cart-summary {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0 20px;
+        }
+
+        .payment-option {
+            border: 1px solid #444;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+        }
+
+        .payment-option:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .payment-option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(0, 136, 204, 0.1);
+        }
+
+        .payment-option i {
+            font-size: 1.2rem;
+        }
+
+        .form-control {
+            background-color: #222;
+            border: 1px solid #444;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">Smar<span>Drive</span></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="shop.html" class="active">Shop</a></li>
+                <li><a href="appointment.html" class="btn-appointment">Book Appointment</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="shop-hero">
+        <h1 class="section-title">Shop Accessories</h1>
+        <p style="color: grey; margin-bottom: 20px;">Quality parts for quality rides.</p>
+
+        <div class="filter-bar">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Audio</button>
+            <button class="filter-btn">Lighting</button>
+            <button class="filter-btn">Security</button>
+            <button class="filter-btn">Interior</button>
+        </div>
+    </div>
+
+    <section class="shop-grid">
+        <!-- Mock Products -->
+        <div class="product-card">
+            <div class="product-image">
+                <i class="fas fa-music"></i>
+                <span class="product-tag">Sale</span>
+            </div>
+            <div class="product-info">
+                <h3>Sony XAV-AX5000</h3>
+                <span class="product-price">$349.99</span>
+                <button class="btn-full">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">
+                <i class="fas fa-volume-up"></i>
+            </div>
+            <div class="product-info">
+                <h3>Alpine Type-R Speakers</h3>
+                <span class="product-price">$129.99</span>
+                <button class="btn-full">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">
+                <i class="fas fa-video"></i>
+            </div>
+            <div class="product-info">
+                <h3>Viofo A129 Dash Cam</h3>
+                <span class="product-price">$169.99</span>
+                <button class="btn-full">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="product-info">
+                <h3>LED Underglow Kit</h3>
+                <span class="product-price">$89.99</span>
+                <button class="btn-full">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="product-info">
+                <h3>Viper Security System</h3>
+                <span class="product-price">$249.99</span>
+                <button class="btn-full">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">
+                <i class="fas fa-car-battery"></i>
+            </div>
+            <div class="product-info">
+                <h3>High-Amp Alternator</h3>
+                <span class="product-price">$399.99</span>
+                <button class="btn-full">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Secure Checkout</h2>
+            <div class="cart-summary">
+                <p>Item: <span id="modalItemName">Product Name</span></p>
+                <p>Price: <span id="modalItemPrice">$0.00</span></p>
+                <hr style="border-color: #333; margin: 10px 0;">
+                <p><strong>Total: <span id="modalTotal">$0.00</span></strong></p>
+            </div>
+
+            <h3>Select Payment Method</h3>
+            <div class="payment-options">
+                <div class="payment-option selected">
+                    <i class="fab fa-cc-visa"></i>
+                    <span>Credit Card</span>
+                </div>
+                <div class="payment-option">
+                    <i class="fab fa-paypal"></i>
+                    <span>PayPal</span>
+                </div>
+                <div class="payment-option">
+                    <i class="fab fa-apple"></i>
+                    <span>Apple Pay</span>
+                </div>
+                <div class="payment-option">
+                    <i class="fab fa-google-pay"></i>
+                    <span>Google Pay</span>
+                </div>
+            </div>
+
+            <div class="payment-form">
+                <input type="text" placeholder="Card Number" class="form-control"
+                    style="width: 100%; margin-bottom: 10px;">
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" placeholder="MM/YY" class="form-control">
+                    <input type="text" placeholder="CVC" class="form-control">
+                </div>
+            </div>
+
+            <button class="btn-full checkout-btn"
+                style="background: var(--primary-color); color: white; margin-top: 20px;">Pay Now</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Smar<span>Drive</span></h3>
+                <p>Your one-stop shop for car audio, security, and styling upgrades.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="appointment.html">Book Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Auto Drive, Car City</p>
+                <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 SmarDrive Car Audio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Modal Logic
+        const modal = document.getElementById("checkoutModal");
+        const closeBtn = document.querySelector(".close-modal");
+        const addToCartBtns = document.querySelectorAll(".btn-full");
+        const modalItemName = document.getElementById("modalItemName");
+        const modalItemPrice = document.getElementById("modalItemPrice");
+        const modalTotal = document.getElementById("modalTotal");
+
+        addToCartBtns.forEach(btn => {
+            btn.addEventListener("click", function () {
+                // Get product details from the card
+                const card = this.closest(".product-card");
+                const title = card.querySelector("h3").innerText;
+                const price = card.querySelector(".product-price").innerText;
+
+                // Populate modal
+                modalItemName.innerText = title;
+                modalItemPrice.innerText = price;
+                modalTotal.innerText = price;
+
+                // Show modal
+                modal.style.display = "flex";
+            });
+        });
+
+        closeBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", (e) => {
+            if (e.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        // Payment Option Selection
+        const paymentOptions = document.querySelectorAll(".payment-option");
+        paymentOptions.forEach(option => {
+            option.addEventListener("click", () => {
+                paymentOptions.forEach(p => p.classList.remove("selected"));
+                option.classList.add("selected");
+            });
+        });
+
+        // Simulate Payment
+        document.querySelector(".checkout-btn").addEventListener("click", () => {
+            alert("Payment Successful! Your order has been placed.");
+            modal.style.display = "none";
+        });
+    </script>
+</body>
+
+</html>

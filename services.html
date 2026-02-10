@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | SmarDrive Car Audio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .services-hero {
+            padding: 100px 20px 60px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1620891549027-9426c95d6371?auto=format&fit=crop&q=80&w=1920&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            text-align: center;
+        }
+
+        .services-detail {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-block {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            margin-bottom: 5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-block:hover {
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .service-block:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .service-content {
+            flex: 1;
+        }
+
+        .service-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .service-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .service-content ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .service-content ul li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-content ul li i {
+            color: var(--accent-color);
+        }
+
+        .service-image {
+            flex: 1;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #222;
+            /* Placeholder */
+            position: relative;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-block:hover .service-image img {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 900px) {
+            .service-block {
+                flex-direction: column !important;
+                gap: 2rem;
+                padding: 1.5rem;
+            }
+
+            .service-image {
+                width: 100%;
+                height: 250px;
+            }
+        }
+
+        /* Pricing Table (Optional for services) */
+        .pricing-section {
+            padding: 4rem 2rem;
+            text-align: center;
+            background-color: #0b0b0b;
+        }
+
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .price-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-color: var(--primary-color);
+        }
+
+        .price-card.featured {
+            background: linear-gradient(135deg, rgba(0, 136, 204, 0.1), rgba(0, 0, 0, 0));
+            border-color: var(--primary-color);
+            position: relative;
+        }
+
+        .price-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .price-card .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-card .duration {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .price-card ul {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .price-card ul li {
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .price-card ul li i {
+            color: var(--accent-color);
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">Smar<span>Drive</span></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="appointment.html" class="btn-appointment">Book Appointment</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="services-hero">
+        <h1 class="section-title">Professional Installation Services</h1>
+        <p>Enhancing your drive with precision and quality craftsmanship.</p>
+    </div>
+
+    <section class="services-detail">
+        <!-- Audio Service -->
+        <div class="service-block">
+            <div class="service-content">
+                <h2>Custom Car Audio</h2>
+                <p>We transform your vehicle into a concert hall on wheels. From basic speaker upgrades to full custom
+                    subwoofer enclosures, our expert technicians ensure the perfect soundstage for your ride.</p>
+                <ul>
+                    <li><i class="fas fa-check"></i> Head Unit Installations (CarPlay/Android Auto)</li>
+                    <li><i class="fas fa-check"></i> Manufacturer Integration (Keep factory look)</li>
+                    <li><i class="fas fa-check"></i> Custom Subwoofer Boxes & Fabrication</li>
+                    <li><i class="fas fa-check"></i> Signal Processing & Tuning</li>
+                </ul>
+                <a href="appointment.html" class="btn btn-primary">Get a Quote</a>
+            </div>
+            <div class="service-image">
+                <img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=1920&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Car Audio Installation">
+            </div>
+        </div>
+
+        <!-- Tint Service -->
+        <div class="service-block">
+            <div class="service-content">
+                <h2>Window Tinting</h2>
+                <p>Stay cool and protect your interior from harmful UV rays. We use only premium ceramic and carbon
+                    films that offer superior heat rejection without interfering with electronic signals.</p>
+                <ul>
+                    <li><i class="fas fa-check"></i> UV Protection (Up to 99%)</li>
+                    <li><i class="fas fa-check"></i> Heat Rejection & Privacy</li>
+                    <li><i class="fas fa-check"></i> Computer Cut Patterns (No knife on glass)</li>
+                    <li><i class="fas fa-check"></i> Lifetime Warranty</li>
+                </ul>
+                <a href="appointment.html" class="btn btn-primary">Book Tinting</a>
+            </div>
+            <div class="service-image">
+                <img src="https://images.unsplash.com/photo-1621996659546-324269e80e22?auto=format&fit=crop&q=80&w=1920&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Window Tinting">
+            </div>
+        </div>
+
+        <!-- Protection Service -->
+        <div class="service-block">
+            <div class="service-content">
+                <h2>Protection & Styling</h2>
+                <p>Keep your car looking showroom new with our paint protection films (PPF) and vinyl wraps. We offer
+                    clear bras to stop rock chips and full color change wraps for a unique look.</p>
+                <ul>
+                    <li><i class="fas fa-check"></i> Paint Protection Film (Clear Bra)</li>
+                    <li><i class="fas fa-check"></i> Vinyl Wraps & Chrome Deletes</li>
+                    <li><i class="fas fa-check"></i> Ceramic Coating</li>
+                    <li><i class="fas fa-check"></i> Headlight & Taillight Tinting</li>
+                </ul>
+                <a href="appointment.html" class="btn btn-primary">Protect Your Ride</a>
+            </div>
+            <div class="service-image">
+                <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1920&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Car wrap and protection">
+            </div>
+        </div>
+    </section>
+
+    <div class="pricing-section">
+        <h2 class="section-title">Popular Packages</h2>
+        <div class="pricing-table">
+            <div class="price-card">
+                <h3>Standard Tint</h3>
+                <span class="price">$199</span>
+                <span class="duration">Starting at</span>
+                <ul>
+                    <li><i class="fas fa-check"></i> Carbon Film</li>
+                    <li><i class="fas fa-check"></i> Heat Rejection</li>
+                    <li><i class="fas fa-check"></i> 3 Year Warranty</li>
+                </ul>
+                <a href="appointment.html" class="btn btn-secondary">Select</a>
+            </div>
+
+            <div class="price-card featured">
+                <h3>Audio Upgrade</h3>
+                <span class="price">$499</span>
+                <span class="duration">Starting at</span>
+                <ul>
+                    <li><i class="fas fa-check"></i> Door Speaker Replacement</li>
+                    <li><i class="fas fa-check"></i> 4-Channel Amplifier</li>
+                    <li><i class="fas fa-check"></i> Professional Tuning</li>
+                </ul>
+                <a href="appointment.html" class="btn btn-primary">Select</a>
+            </div>
+
+            <div class="price-card">
+                <h3>Premium Shield</h3>
+                <span class="price">$899</span>
+                <span class="duration">Starting at</span>
+                <ul>
+                    <li><i class="fas fa-check"></i> Front Bumper PPF</li>
+                    <li><i class="fas fa-check"></i> Self-Healing Film</li>
+                    <li><i class="fas fa-check"></i> 10 Year Warranty</li>
+                </ul>
+                <a href="appointment.html" class="btn btn-secondary">Select</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Smar<span>Drive</span></h3>
+                <p>Your one-stop shop for car audio, security, and styling upgrades.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="appointment.html">Book Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Auto Drive, Car City</p>
+                <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 SmarDrive Car Audio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

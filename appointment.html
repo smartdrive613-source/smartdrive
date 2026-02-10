@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | SmarDrive Car Audio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .appointment-hero {
+            padding: 100px 20px 40px;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=1920&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            text-align: center;
+        }
+
+        .appointment-container {
+            max-width: 800px;
+            margin: -50px auto 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .appointment-form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: None;
+            border-color: var(--primary-color);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        select.form-control {
+            color: white;
+            appearance: none;
+            padding-right: 30px;
+            background-image: linear-gradient(45deg, transparent 50%, white 50%), linear-gradient(135deg, white 50%, transparent 50%);
+            background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px);
+            background-size: 5px 5px, 5px 5px;
+            background-repeat: no-repeat;
+        }
+
+        select.form-control option {
+            background-color: #333;
+            color: white;
+        }
+
+        .appointment-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .appointment-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 136, 204, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">Smar<span>Drive</span></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="appointment.html" class="active btn-appointment">Book Appointment</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="appointment-hero">
+        <h1 class="section-title">Schedule Your Service</h1>
+        <p style="color: #ddd;">Fast, professional installation at your convenience.</p>
+    </div>
+
+    <div class="appointment-container">
+        <form class="appointment-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="(555) 555-5555" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="service">Service Needed</label>
+                    <select id="service" class="form-control" required>
+                        <option value="" disabled selected>Select a Service</option>
+                        <option value="audio">Car Audio Installation</option>
+                        <option value="tint">Window Tinting</option>
+                        <option value="protection">Protection Stickers / PPF</option>
+                        <option value="security">Security System Installation</option>
+                        <option value="lighting">Lighting Upgrade</option>
+                        <option value="consultation">General Consultation</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Preferred Date</label>
+                    <input type="date" id="date" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="vehicle">Vehicle Make & Model</label>
+                <input type="text" id="vehicle" class="form-control" placeholder="e.g. 2020 Toyota Camry" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Additional Details</label>
+                <textarea id="message" class="form-control"
+                    placeholder="Tell us more about what you need..."></textarea>
+            </div>
+
+            <button type="submit" class="appointment-btn">Request Appointment</button>
+        </form>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Smar<span>Drive</span></h3>
+                <p>Your one-stop shop for car audio, security, and styling upgrades.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="appointment.html">Book Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Auto Drive, Car City</p>
+                <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 SmarDrive Car Audio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Simple form handling simulation
+        document.querySelector('.appointment-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Thank you! Your appointment request has been received. We will contact you shortly to confirm.');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>
